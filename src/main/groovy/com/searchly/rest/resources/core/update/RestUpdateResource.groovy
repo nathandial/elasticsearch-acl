@@ -15,12 +15,10 @@ import javax.ws.rs.core.Context
 /**
  * @author ferhat
  */
-@Path("/")
+@Path("/{index}/{type}/{id}/_update")
 class RestUpdateResource extends RestBaseResource {
-
-    @Secure(Role.MEMBER)
     @POST
-    @Path("{index}/{type}/{id}/_update")
+    @Secure(Role.MEMBER)
     public void getSuggest(@PathParam("index") final String index, @Suspended final AsyncResponse response, @Context final HttpRequest request) {
         def account = account(request)
         if (isAuthorized(account, index)) {

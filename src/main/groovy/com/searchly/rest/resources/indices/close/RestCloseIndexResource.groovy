@@ -15,11 +15,10 @@ import javax.ws.rs.core.Context
 /**
  @author ferhat
  */
-@Path("/")
+@Path("/{index}/_close")
 class RestCloseIndexResource extends RestBaseResource {
-    @Secure(Role.MEMBER)
     @POST
-    @Path("{index}/_close")
+    @Secure(Role.MEMBER)
     public void close(@PathParam("index") final String index, @Suspended final AsyncResponse response, @Context final HttpRequest request) {
         def account = account(request)
         if (isAuthorized(account, index)) {

@@ -16,12 +16,10 @@ import javax.ws.rs.core.Context
 /**
  * @author ferhat
  */
-@Path("/")
+@Path("/{index}/{type}/{id}/_explain")
 class RestExplainResource extends RestBaseResource {
-
-    @Secure(Role.MEMBER)
     @GET
-    @Path("{index}/{type}/{id}/_explain")
+    @Secure(Role.MEMBER)
     public void getExplain(@PathParam("index") final String index, @Suspended final AsyncResponse response, @Context final HttpRequest request) {
         def account = account(request)
         if (isAuthorized(account, index)) {
@@ -29,9 +27,8 @@ class RestExplainResource extends RestBaseResource {
         }
     }
 
-    @Secure(Role.MEMBER)
     @POST
-    @Path("{index}/{type}/{id}/_explain")
+    @Secure(Role.MEMBER)
     public void postExplain(@PathParam("index") final String index, @Suspended final AsyncResponse response, @Context final HttpRequest request) {
         def account = account(request)
         if (isAuthorized(account, index)) {

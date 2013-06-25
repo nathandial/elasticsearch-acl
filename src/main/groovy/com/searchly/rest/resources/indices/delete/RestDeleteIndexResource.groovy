@@ -15,12 +15,10 @@ import javax.ws.rs.core.Context
 /**
  @author ferhat
  */
-@Path("/")
+@Path("/{index}")
 class RestDeleteIndexResource extends RestBaseResource {
-
-    @Secure(Role.MEMBER)
     @DELETE
-    @Path("{index}")
+    @Secure(Role.MEMBER)
     public void deleteIndex(@PathParam("index") final String index, @Suspended final AsyncResponse response, @Context final HttpRequest request) {
         def account = account(request)
         if (isAuthorized(account, index)) {

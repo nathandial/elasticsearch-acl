@@ -3,7 +3,6 @@ package org.elasticsearch.plugin.acl
 import com.searchly.SearchlyModule
 import com.searchly.node.SearchlyNode
 import com.searchly.repository.facade.AccountFacade
-import com.searchly.repository.facade.hazelcast.HazelCastAccountFacade
 import org.elasticsearch.common.collect.ImmutableList
 import org.elasticsearch.common.component.LifecycleComponent
 import org.elasticsearch.common.inject.Module
@@ -29,7 +28,6 @@ class AclPlugin extends AbstractPlugin {
         return ImmutableList.of(Modules.createModule(SearchlyModule.class, settings))
     }
 
-    @SuppressWarnings("rawtypes")
     @Override
     public Collection<Class<? extends LifecycleComponent>> services() {
         def services = []

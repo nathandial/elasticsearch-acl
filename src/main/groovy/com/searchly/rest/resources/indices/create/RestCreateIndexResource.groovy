@@ -16,7 +16,7 @@ import javax.ws.rs.core.Response
 /**
  @author ferhat
  */
-@Path("/")
+@Path("/{index}")
 class RestCreateIndexResource extends RestBaseResource {
 
     def static banned = [
@@ -24,16 +24,14 @@ class RestCreateIndexResource extends RestBaseResource {
             'translog', 'cache', 'gateway', 'routing', 'recovery', 'gc_deletes', 'ttl', 'store', 'refresh'
     ]
 
-    @Secure(Role.MEMBER)
     @POST
-    @Path("{index}")
+    @Secure(Role.MEMBER)
     public void createWithPost(@PathParam("index") final String index, @Suspended final AsyncResponse response, @Context final HttpRequest request) {
         executeRequest(index, request, response)
     }
 
-    @Secure(Role.MEMBER)
     @PUT
-    @Path("{index}")
+    @Secure(Role.MEMBER)
     public void createWithPut(@PathParam("index") final String index, @Suspended final AsyncResponse response, @Context final HttpRequest request) {
         executeRequest(index, request, response)
     }

@@ -16,11 +16,10 @@ import javax.ws.rs.core.Context
 /**
  * @author ferhat
  */
-@Path("/")
+@Path("/{index}/{type}/{id}/_mlt")
 class RestMoreLikeThisResource extends RestBaseResource {
-    @Secure(Role.MEMBER)
     @POST
-    @Path("{index}/{type}/{id}/_mlt")
+    @Secure(Role.MEMBER)
     public void postMoreLikeThis(@PathParam("index") final String index, @Suspended final AsyncResponse response, @Context final HttpRequest request) {
         def account = account(request)
         if (isAuthorized(account, index)) {
@@ -28,9 +27,8 @@ class RestMoreLikeThisResource extends RestBaseResource {
         }
     }
 
-    @Secure(Role.MEMBER)
     @GET
-    @Path("{index}/{type}/{id}/_mlt")
+    @Secure(Role.MEMBER)
     public void getMoreLikeThis(@PathParam("index") final String index, @Suspended final AsyncResponse response, @Context final HttpRequest request) {
         def account = account(request)
         if (isAuthorized(account, index)) {

@@ -15,11 +15,10 @@ import javax.ws.rs.core.Context
 /**
  * @author ferhat
  */
-@Path("/")
+@Path("/{index}/{type}/{id}")
 class RestDeleteResource extends RestBaseResource {
-    @Secure(Role.MEMBER)
     @DELETE
-    @Path("{index}/{type}/{id}")
+    @Secure(Role.MEMBER)
     public void count(@PathParam("index") final String index, @Suspended final AsyncResponse response, @Context final HttpRequest request) {
         def account = account(request)
         if (isAuthorized(account, index)) {

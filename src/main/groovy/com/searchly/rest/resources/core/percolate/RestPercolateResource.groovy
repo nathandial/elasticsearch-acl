@@ -16,12 +16,10 @@ import javax.ws.rs.core.Context
 /**
  * @author ferhat
  */
-@Path("/")
+@Path("/{index}/{type}/_percolate")
 class RestPercolateResource extends RestBaseResource {
-
-    @Secure(Role.MEMBER)
     @GET
-    @Path("{index}/{type}/_percolate")
+    @Secure(Role.MEMBER)
     public void getPercolate(@PathParam("index") final String index, @Suspended final AsyncResponse response, @Context final HttpRequest request) {
         def account = account(request)
         if (isAuthorized(account, index)) {
@@ -29,9 +27,8 @@ class RestPercolateResource extends RestBaseResource {
         }
     }
 
-    @Secure(Role.MEMBER)
     @POST
-    @Path("{index}/{type}/_percolate")
+    @Secure(Role.MEMBER)
     public void postPercolate(@PathParam("index") final String index, @Suspended final AsyncResponse response, @Context final HttpRequest request) {
         def account = account(request)
         if (isAuthorized(account, index)) {
