@@ -16,11 +16,11 @@ import javax.ws.rs.core.Context
 /**
  @author ferhat
  */
-@Path("/")
+@Path("/{index}/_settings")
 class RestSettingsResource extends RestBaseResource {
-    @Secure(Role.MEMBER)
+
     @GET
-    @Path("{index}/_settings")
+    @Secure(Role.MEMBER)
     public void get(@PathParam("index") final String index, @Suspended final AsyncResponse response, @Context final HttpRequest request) {
         def account = account(request)
         if (isAuthorized(account, index)) {
@@ -28,9 +28,8 @@ class RestSettingsResource extends RestBaseResource {
         }
     }
 
-    @Secure(Role.MEMBER)
     @PUT
-    @Path("{index}/_settings")
+    @Secure(Role.MEMBER)
     public void update(@PathParam("index") final String index, @Suspended final AsyncResponse response, @Context final HttpRequest request) {
         def account = account(request)
         if (isAuthorized(account, index)) {

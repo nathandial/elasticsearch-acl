@@ -13,13 +13,12 @@ import javax.ws.rs.core.Context
 /**
  @author ferhat
  */
-@Path("/")
+@Path("/{index}/_optimize")
+@Produces("application/json")
 class RestOptimizeResource extends RestBaseResource {
 
-    @Secure(Role.MEMBER)
     @GET
-    @Path("{index}/_optimize")
-    @Produces("application/json")
+    @Secure(Role.MEMBER)
     def optimizeGet(@PathParam("index") final String index, @Suspended final AsyncResponse response, @Context final HttpRequest request) {
         def account = account(request)
         if (isAuthorized(account, index)) {
@@ -27,10 +26,8 @@ class RestOptimizeResource extends RestBaseResource {
         }
     }
 
-    @Secure(Role.MEMBER)
     @POST
-    @Path("{index}/_optimize")
-    @Produces("application/json")
+    @Secure(Role.MEMBER)
     def optimizePost(@PathParam("index") final String index, @Suspended final AsyncResponse response, @Context final HttpRequest request) {
         def account = account(request)
         if (isAuthorized(account, index)) {

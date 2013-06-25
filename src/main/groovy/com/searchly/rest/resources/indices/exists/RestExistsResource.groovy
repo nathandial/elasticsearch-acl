@@ -15,12 +15,10 @@ import javax.ws.rs.core.Context
 /**
  @author ferhat
  */
-@Path("/")
+@Path("/{index}")
 class RestExistsResource extends RestBaseResource {
-
-    @Secure(Role.MEMBER)
     @HEAD
-    @Path("{index}")
+    @Secure(Role.MEMBER)
     public void indexExists(@PathParam("index") final String index, @Suspended final AsyncResponse response, @Context final HttpRequest request) {
         def account = account(request)
         if (isAuthorized(account, index)) {
@@ -28,9 +26,9 @@ class RestExistsResource extends RestBaseResource {
         }
     }
 
-    @Secure(Role.MEMBER)
     @HEAD
-    @Path("{index}/{type}")
+    @Secure(Role.MEMBER)
+    @Path("/{type}")
     public void typeExists(@PathParam("index") final String index, @Suspended final AsyncResponse response, @Context final HttpRequest request) {
         def account = account(request)
         if (isAuthorized(account, index)) {

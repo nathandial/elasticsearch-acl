@@ -13,12 +13,10 @@ import javax.ws.rs.core.Context
  * @author ferhat
  */
 
-@Path("/")
+@Path("/_user/api-key/change")
 class RestAccountApiKeyChangeResource extends RestBaseResource {
-
-    @Secure(Role.SYSTEM)
     @POST
-    @Path("_user/api-key/change")
+    @Secure(Role.SYSTEM)
     public String change(@Context final HttpRequest request) {
         def body = request.getAttribute(PARSED_JSON_BODY)
         def currentApiKey = body.current_api_key

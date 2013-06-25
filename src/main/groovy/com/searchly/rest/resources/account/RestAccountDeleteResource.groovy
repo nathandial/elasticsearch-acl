@@ -15,11 +15,10 @@ import javax.ws.rs.core.Request
  * @author ferhat
  */
 @Slf4j
-@Path("/")
+@Path("/_user/{targetApiKey}")
 class RestAccountDeleteResource extends RestBaseResource {
-    @Secure(Role.SYSTEM)
     @GET
-    @Path("_user/{targetApiKey}")
+    @Secure(Role.SYSTEM)
     public String delete(@PathParam("targetApiKey") final String targetApiKey) {
         def account = accountFacade.getAccount(targetApiKey)
         accountFacade.removeAccount(account)

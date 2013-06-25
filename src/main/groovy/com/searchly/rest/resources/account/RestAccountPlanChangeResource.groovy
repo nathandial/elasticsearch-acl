@@ -15,11 +15,10 @@ import javax.ws.rs.core.Context
 /**
  * @author ferhat
  */
-@Path("/")
+@Path("/_user/plan/change/{targetApiKey}")
 class RestAccountPlanChangeResource extends RestBaseResource {
-    @Secure(Role.SYSTEM)
     @POST
-    @Path("_user/plan/change/{targetApiKey}")
+    @Secure(Role.SYSTEM)
     public void change(@PathParam("targetApiKey") final String targetApiKey,
                        @Suspended final AsyncResponse response, @Context final HttpRequest request) {
         def account = accountFacade.getAccount(targetApiKey)

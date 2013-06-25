@@ -55,11 +55,11 @@ import org.elasticsearch.common.settings.Settings
 /**
  @author ferhat
  */
-class SearchlyModule extends AbstractModule {
+class AclModule extends AbstractModule {
 
     def settings
 
-    public SearchlyModule(Settings settings) {
+    public AclModule(Settings settings) {
         this.settings = settings
     }
 

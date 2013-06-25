@@ -15,11 +15,10 @@ import javax.ws.rs.core.Context
 /**
  @author ferhat
  */
-@Path("/")
+@Path("/{index}/_segments")
 class RestIndicesSegmentsResource extends RestBaseResource {
-    @Secure(Role.MEMBER)
     @POST
-    @Path("{index}/_segments")
+    @Secure(Role.MEMBER)
     public void open(@PathParam("index") final String index, @Suspended final AsyncResponse response, @Context final HttpRequest request) {
         def account = account(request)
         if (isAuthorized(account, index)) {
