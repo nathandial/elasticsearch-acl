@@ -16,11 +16,10 @@ import javax.ws.rs.core.Context
 /**
  @author ferhat
  */
-@Path("/")
+@Path("{index}/_analyze")
 class RestAnalyzeResource extends RestBaseResource {
     @Secure(Role.MEMBER)
     @GET
-    @Path("{index}/_analyze")
     public void analyzeGet(@PathParam("index") final String index, @Suspended final AsyncResponse response, @Context final HttpRequest request) {
         def account = account(request)
         if (isAuthorized(account, index)) {
@@ -30,12 +29,10 @@ class RestAnalyzeResource extends RestBaseResource {
 
     @Secure(Role.MEMBER)
     @POST
-    @Path("{index}/_analyze")
     public void analyzePost(@PathParam("index") final String index, @Suspended final AsyncResponse response, @Context final HttpRequest request) {
         def account = account(request)
         if (isAuthorized(account, index)) {
             execute(request, response, index, account)
         }
     }
-
 }
