@@ -12,11 +12,11 @@ import javax.ws.rs.PathParam
 /**
  * @author ferhat
  */
-@Path("/")
+@Path("/_user/stats/{targetApiKey}")
 class RestAccountGetStatsResource extends RestBaseResource {
     @Secure(Role.SYSTEM)
     @GET
-    @Path("_user/stats/{targetApiKey}")
+
     public String stats(@PathParam("targetApiKey") final String targetApiKey) {
         def account = accountFacade.getAccount(targetApiKey)
         return JsonOutput.toJson(account)
