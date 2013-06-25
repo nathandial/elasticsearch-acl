@@ -36,99 +36,101 @@ class AccountElasticSearchStore implements AccountStore {
             if (!existsFuture.actionGet().isExists()) {
                 def indexSettings = ['index.auto_expand_replicas': '0-all', 'index.number_of_shards': 1, 'index.refresh_interval': '10s']
 
-                def mapping = "{\n" +
-                        "    \"user\": {\n" +
-                        "        \"_all\": {\n" +
-                        "            \"enabled\": false\n" +
-                        "        },\n" +
-                        "        \"properties\": {\n" +
-                        "            \"api_key\": {\n" +
-                        "                \"type\": \"string\",\n" +
-                        "                \"index\": \"not_analyzed\"\n" +
-                        "            },\n" +
-                        "            \"plan\": {\n" +
-                        "                \"properties\": {\n" +
-                        "                    \"number_of_shards\": {\n" +
-                        "                        \"type\": \"integer\",\n" +
-                        "                        \"index\": \"not_analyzed\"\n" +
-                        "                    },\n" +
-                        "                    \"number_of_replicas\": {\n" +
-                        "                        \"type\": \"integer\",\n" +
-                        "                        \"index\": \"not_analyzed\"\n" +
-                        "                    },\n" +
-                        "                    \"max_index_count\": {\n" +
-                        "                        \"type\": \"integer\",\n" +
-                        "                        \"index\": \"not_analyzed\"\n" +
-                        "                    },\n" +
-                        "                    \"max_docs_count\": {\n" +
-                        "                        \"type\": \"long\",\n" +
-                        "                        \"index\": \"not_analyzed\"\n" +
-                        "                    },\n" +
-                        "                    \"max_docs_size\": {\n" +
-                        "                        \"type\": \"long\",\n" +
-                        "                        \"index\": \"not_analyzed\"\n" +
-                        "                    },\n" +
-                        "                    \"request_per_second\": {\n" +
-                        "                        \"type\": \"integer\",\n" +
-                        "                        \"index\": \"not_analyzed\"\n" +
-                        "                    },\n" +
-                        "                    \"node_tag\": {\n" +
-                        "                        \"type\": \"string\",\n" +
-                        "                        \"index\": \"not_analyzed\"\n" +
-                        "                    }\n" +
-                        "                }\n" +
-                        "            },\n" +
-                        "            \"email\": {\n" +
-                        "                \"type\": \"string\",\n" +
-                        "                \"index\": \"not_analyzed\"\n" +
-                        "            },\n" +
-                        "            \"doc_count\": {\n" +
-                        "                \"type\": \"long\",\n" +
-                        "                \"index\": \"not_analyzed\"\n" +
-                        "            },\n" +
-                        "            \"doc_size\": {\n" +
-                        "                \"type\": \"long\",\n" +
-                        "                \"index\": \"not_analyzed\"\n" +
-                        "            },\n" +
-                        "            \"indices\": {\n" +
-                        "                \"properties\": {\n" +
-                        "                    \"native_name\": {\n" +
-                        "                        \"type\": \"string\",\n" +
-                        "                        \"index\": \"not_analyzed\"\n" +
-                        "                    },\n" +
-                        "                    \"name\": {\n" +
-                        "                        \"type\": \"string\",\n" +
-                        "                        \"index\": \"not_analyzed\"\n" +
-                        "                    }\n" +
-                        "                }\n" +
-                        "            },\n" +
-                        "            \"aliases\": {\n" +
-                        "                \"properties\": {\n" +
-                        "                    \"native_name\": {\n" +
-                        "                        \"type\": \"string\",\n" +
-                        "                        \"index\": \"not_analyzed\"\n" +
-                        "                    },\n" +
-                        "                    \"index_native_name\": {\n" +
-                        "                        \"type\": \"string\",\n" +
-                        "                        \"index\": \"not_analyzed\"\n" +
-                        "                    },\n" +
-                        "                    \"name\": {\n" +
-                        "                        \"type\": \"string\",\n" +
-                        "                        \"index\": \"not_analyzed\"\n" +
-                        "                    }\n" +
-                        "                }\n" +
-                        "            },\n" +
-                        "            \"role\": {\n" +
-                        "                \"type\": \"string\",\n" +
-                        "                \"index\": \"not_analyzed\"\n" +
-                        "            }\n" +
-                        "        }\n" +
-                        "    }\n" +
-                        "}"
+                def mapping = """
+{
+    "user": {
+        "_all": {
+            "enabled": false
+        },
+        "properties": {
+            "api_key": {
+                "type": "string",
+                "index": "not_analyzed"
+            },
+            "plan": {
+                "properties": {
+                    "number_of_shards": {
+                        "type": "integer",
+                        "index": "not_analyzed"
+                    },
+                    "number_of_replicas": {
+                        "type": "integer",
+                        "index": "not_analyzed"
+                    },
+                    "max_index_count": {
+                        "type": "integer",
+                        "index": "not_analyzed"
+                    },
+                    "max_docs_count": {
+                        "type": "long",
+                        "index": "not_analyzed"
+                    },
+                    "max_docs_size": {
+                        "type": "long",
+                        "index": "not_analyzed"
+                    },
+                    "request_per_second": {
+                        "type": "integer",
+                        "index": "not_analyzed"
+                    },
+                    "node_tag": {
+                        "type": "string",
+                        "index": "not_analyzed"
+                    }
+                }
+            },
+            "email": {
+                "type": "string",
+                "index": "not_analyzed"
+            },
+            "doc_count": {
+                "type": "long",
+                "index": "not_analyzed"
+            },
+            "doc_size": {
+                "type": "long",
+                "index": "not_analyzed"
+            },
+            "indices": {
+                "properties": {
+                    "native_name": {
+                        "type": "string",
+                        "index": "not_analyzed"
+                    },
+                    "name": {
+                        "type": "string",
+                        "index": "not_analyzed"
+                    }
+                }
+            },
+            "aliases": {
+                "properties": {
+                    "native_name": {
+                        "type": "string",
+                        "index": "not_analyzed"
+                    },
+                    "index_native_name": {
+                        "type": "string",
+                        "index": "not_analyzed"
+                    },
+                    "name": {
+                        "type": "string",
+                        "index": "not_analyzed"
+                    }
+                }
+            },
+            "role": {
+                "type": "string",
+                "index": "not_analyzed"
+            }
+        }
+    }
+}
+"""
 
 
                 def created = client.admin().indices().prepareCreate(INDEX)
-                        .setSettings(indexSettings).addMapping(TYPE, mapping).execute().get().isAcknowledged()
+                        .setSettings(indexSettings).addMapping(TYPE, mapping.toString()).execute().get().isAcknowledged()
                 if (created) {
                     def systemAccount = [api_key: 'system224353f9c729511ea6e509f048', role: 'system', request_per_second: 200, email: 'admin@searchly.com']
                     def future = client.prepareIndex().setIndex(INDEX)
