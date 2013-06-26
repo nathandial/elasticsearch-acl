@@ -1,0 +1,58 @@
+apply plugin: 'java'
+apply plugin: 'groovy'
+apply plugin:'application'
+
+
+sourceCompatibility = 1.6
+version = '0.0.1'
+
+elasticsearch_version = "0.90.1"
+groovy_version= "2.1.5"
+hz_version = "2.6"
+resteasy_version = "3.0.1.Final"
+
+
+repositories {
+    mavenCentral()
+}
+
+configurations {
+	provided
+}
+
+sourceSets {
+	main.compileClasspath += configurations.provided
+	test.compileClasspath += configurations.provided
+	test.runtimeClasspath += configurations.provided
+}
+
+
+dependencies {
+provided "org.elasticsearch:elasticsearch:${elasticsearch_version}"
+compile "org.codehaus.groovy:groovy-all:${groovy_version}"
+compile "com.hazelcast:hazelcast:${hz_version}"
+compile "com.hazelcast:hazelcast-cloud:${hz_version}"
+compile "org.jboss.resteasy:resteasy-jaxrs:${resteasy_version}"
+compile "org.jboss.resteasy:resteasy-netty:${resteasy_version}"
+compile "org.jboss.resteasy:tjws:${resteasy_version}"
+compile "javax.servlet:servlet-api:2.5"
+testCompile "junit:junit:4.10"
+testCompile "org.mockito:mockito-all:1.9.5"
+}
+
+
+jar {
+    from { 
+		configurations.compile.collect { 
+				if(it.isDirectory()){
+					it
+				}else{
+					filtered = zipTree(it).matching {
+						exclude "**/*.java"
+					}
+					filtered
+				}
+
+			} 
+		}
+}
